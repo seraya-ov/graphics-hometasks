@@ -52,8 +52,11 @@ int main(void)
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-	// Dark blue background
+	// Black background
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
@@ -86,8 +89,6 @@ int main(void)
 	GLuint FirstMatrixID = glGetUniformLocation(firstProgramID, "MVP");
 	GLuint SecondMatrixID = glGetUniformLocation(secondProgramID, "MVP");
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	do {
 
 		// Clear the screen
@@ -95,8 +96,8 @@ int main(void)
 
 		glm::mat4 View = glm::lookAt(
 			glm::vec3(cos(rotationAngle), 0, sin(rotationAngle)),
-			glm::vec3(0, 0, 0), // Камера направлена в начало координат
-			glm::vec3(0, 1, 0)  // "Голова" находится сверху
+			glm::vec3(0, 0, 0),
+			glm::vec3(0, 1, 0)
 		);
 		glm::mat4 MVP = ProjectionMatrix * View * ModelMatrix;
 
@@ -113,7 +114,6 @@ int main(void)
 		);
 
 		// Draw the triangles !
-
 		glUseProgram(firstProgramID);
 		glUniformMatrix4fv(FirstMatrixID, 1, GL_FALSE, &MVP[0][0]);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
