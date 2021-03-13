@@ -122,8 +122,8 @@ int main(void)
 
 		glm::mat4 View = glm::lookAt(
 			glm::vec3(cos(rotationAngle), 0, sin(rotationAngle)), 
-			glm::vec3(0, 0, 0), // Камера направлена в начало координат
-			glm::vec3(0, 1, 0)  // "Голова" находится сверху
+			glm::vec3(0, 0.25f, 0),
+			glm::vec3(0, 1, 0)  
 		);
 		glm::mat4 MVP = ProjectionMatrix * View * ModelMatrix;
 
