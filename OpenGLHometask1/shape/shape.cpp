@@ -157,7 +157,7 @@ int main(void)
 		// Draw the triangles
 		glDrawArrays(GL_TRIANGLES, 0, 12);
 
-		rotationAngle += 0.001;
+		rotationAngle += 0.001f;
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
